@@ -13,7 +13,7 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ak/.zshrc'
-alias sudo='doas'
+#alias sudo='doas'
 alias ls='ls --color'
 alias unzip='bsdunzip'
 autoload -Uz compinit
