@@ -14,4 +14,4 @@ run ``` mv powerlevel10k ~/powerlevel10k && echo 'source ~/powerlevel10k/powerle
     git clone git@github.com:romkatv/powerlevel10k.git ~/  
     echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc 
 ```
-                and open a new terminal
+and open a new terminal
