@@ -16,11 +16,15 @@ zstyle :compinstall filename '/home/ak/.zshrc'
 #alias sudo='doas'
 alias ls='ls --color'
 alias unzip='bsdunzip'
+alias list_orphans='echo $(pacman -Qdtq)'
 autoload -Uz compinit
 compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # End of lines added by compinstall
 
+pyclean () {
+	find . -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
+}
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
