@@ -31,14 +31,11 @@ pyclean () {
 
 # end of own modificaions
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source /usr/share/nvm/init-nvm.sh
-
-# To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
-[[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
 
 PATH="/home/ak/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/ak/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -47,4 +44,3 @@ PERL_MB_OPT="--install_base \"/home/ak/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/ak/perl5"; export PERL_MM_OPT;
 
 #path customizations
-export PATH=${PATH}:/home/ak/Diverse/pintos/utils
