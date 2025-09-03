@@ -68,6 +68,11 @@ add_user_to_groups(){
 	sudo usermod -aG audio video wheel ${USER}
 }
 
+set_shell(){
+	chsh -s /usr/bin/zsh
+	sudo chsh -s /usr/bin/zsh
+}
+
 yay -Syyu --noconfirm --disable-download-timeout
 
 install_basic_packages
@@ -76,5 +81,6 @@ install_yay_packages
 update_configs
 link_dotfiles
 add_user_to_groups
+set_shell
 
 echo "your done! reboot your system"
