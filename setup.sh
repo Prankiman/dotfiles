@@ -43,8 +43,8 @@ install_yay_packages() {
 }
 
 start_daemons(){
-	sudo systemctl enable NetworkManager
-	sudo systemctl enable sddm
+    sudo systemctl enable NetworkManager
+    sudo systemctl enable sddm
 }
 
 # for updating files in ${HOME}/.config
@@ -54,30 +54,31 @@ update_configs() {
 }
 
 link_dotfiles(){
-	ln -s ~/dotfiles/.bashrc ~/.bashrc
-	ln -s ~/dotfiles/.bash_profile  ~/.bash_profile
-	ln -s ~/dotfiles/.zcompdump ~/.zcompdump
-	ln -s ~/dotfiles/.zprofile ~/.zprofile
-	ln -s ~/dotfiles/.zshrc ~/.zshrc
-	ln -s ~/dotfiles/.p10k.zsh ~/.p10k.zsh
-	ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-	ln -s ~/dotfiles/.git-credentials ~/.git-credentials
-	ln -s ~/dotfiles/.vim ~/.vim
-	ln -s ~/dotfiles/.vimrc ~/.vimrc
+    ln -s ~/dotfiles/.bashrc ~/.bashrc
+    ln -s ~/dotfiles/.bash_profile  ~/.bash_profile
+    ln -s ~/dotfiles/.zcompdump ~/.zcompdump
+    ln -s ~/dotfiles/.zprofile ~/.zprofile
+    ln -s ~/dotfiles/.zshrc ~/.zshrc
+    ln -s ~/dotfiles/.p10k.zsh ~/.p10k.zsh
+    ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+    ln -s ~/dotfiles/.git-credentials ~/.git-credentials
+    ln -s ~/dotfiles/.vim ~/.vim
+    ln -s ~/dotfiles/.vimrc ~/.vimrc
 }
 
 add_user_to_groups(){
-	sudo usermod -aG audio video wheel ${USER}
+    sudo usermod -aG audio video wheel ${USER}
 }
 
 set_shell(){
-	chsh -s /usr/bin/zsh
-	sudo chsh -s /usr/bin/zsh
+    chsh -s /usr/bin/zsh
+    sudo chsh -s /usr/bin/zsh
 }
 
 install_vimrc_config(){
     git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
     sh ~/.vim_runtime/install_awesome_vimrc.sh
+    mkdir -p ~/.vim_runtime/pack/plugins/start
 }
 
 yay -Syyu --noconfirm --disable-download-timeout

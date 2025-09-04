@@ -24,6 +24,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # own modifications
 alias list_orphans='echo $(pacman -Qdtq)'
+alias rformat='Rscript -e "styler::style_dir()"'
 
 pyclean () {
 	find . -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
