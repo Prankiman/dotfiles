@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Lines configured by zsh-newuser-install
@@ -27,7 +27,7 @@ alias list_orphans='echo $(pacman -Qdtq)'
 alias rformat='Rscript -e "styler::style_dir()"'
 
 pyclean () {
-	find . -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
+    find . -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
 }
 
 # end of own modificaions
