@@ -17,7 +17,7 @@ install_from_aur() {
 
 # Assumes 'sudo' command exists
 install_basic_packages() {
-    dependencies=("os-prober" "gcc" "python" "git" "gdb" "wget" "zsh" "curl" "go" "sed" "plocate" "make" "nvm" "cmake" "net-tools" "unzip" "p7zip" "docker" "sddm" "plasma-desktop" "filelight" "firefox" "dolphin" "okular" "konsole" "pipewire" "pipewire-pulse" "bluez" "networkmanager" "wireshark-qt"  "python-pip" "python-pipx" "wl-clipboard")
+    dependencies=("os-prober" "r" "gcc" "python" "git" "gdb" "wget" "zsh" "curl" "go" "sed" "plocate" "make" "nvm" "cmake" "net-tools" "unzip" "p7zip" "docker" "sddm" "plasma-desktop" "filelight" "firefox" "dolphin" "okular" "konsole" "pipewire" "pipewire-pulse" "bluez" "networkmanager" "wireshark-qt"  "python-pip" "python-pipx" "wl-clipboard")
 
     # Install missing dependencies
     for dependency in "${dependencies[@]}"; do
