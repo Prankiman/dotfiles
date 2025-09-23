@@ -1,8 +1,7 @@
 #!/bin/sh
 
-set -x
-echo ${USER}
-echo ${HOME}
+# comment to allow partial steps to fail
+set -e
 
 command_exists() {
     command -v "$1" >"/dev/null" 2>&1
