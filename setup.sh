@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# exit on error
+set -e
+
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
@@ -17,7 +20,7 @@ install_from_aur() {
 
 # Assumes 'sudo' command exists
 install_basic_packages() {
-    dependencies=("os-prober" "r" "gcc" "python" "git" "gdb" "wget" "zsh" "curl" "go" "sed" "plocate" "make" "nvm" "cmake" "net-tools" "unzip" "p7zip" "docker" "sddm" "plasma-desktop" "filelight" "firefox" "dolphin" "okular" "konsole" "pipewire" "pipewire-pulse" "bluez" "networkmanager" "wireshark-qt"  "python-pip" "python-pipx" "wl-clipboard")
+    dependencies=$(< "./basic_dependencies")
 
     # Install missing dependencies
     for dependency in "${dependencies[@]}"; do
@@ -31,7 +34,7 @@ install_basic_packages() {
 
 
 install_yay_packages() {
-    yay_dependencies=("zsh-theme-powerlevel10k-git" "tt" "neofetch" )
+    yay_dependencies=$(< "./yay_dependencies")
 
     for dependency in "${yay_dependencies[@]}"; do
         if ! command_exists "$dependency"; then
