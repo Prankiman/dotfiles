@@ -1,26 +1,27 @@
 #!/bin/sh
 
-# exit on error
-set -e
+set -x
+echo ${USER}
+echo ${HOME}
 
 command_exists() {
-    command -v "$1" >/dev/null 2>&1
+    command -v "$1" >"/dev/null" 2>&1
 }
 
 package_installed() {
-    pacman -Q "$1" >/dev/null 2>&1
+    pacman -Q "$1" >"/dev/null" 2>&1
 }
 
 install_from_aur() {
     if ! command_exists "yay"; then
-        git clone https://aur.archlinux.org/yay.git /tmp/yay
-        cd /tmp/yay && makepkg -sirc --noconfirm
+        git clone "https://aur.archlinux.org/yay.git" "/tmp/yay"
+        cd "/tmp/yay" && makepkg -sirc --noconfirm
     fi
 }
 
 # Assumes 'sudo' command exists
 install_basic_packages() {
-    dependencies=$(< "./basic_dependencies")
+    dependencies=($(< "./basic_dependencies"))
 
     # Install missing dependencies
     for dependency in "${dependencies[@]}"; do
@@ -34,7 +35,7 @@ install_basic_packages() {
 
 
 install_yay_packages() {
-    yay_dependencies=$(< "./yay_dependencies")
+    yay_dependencies=($(< "./yay_dependencies"))
 
     for dependency in "${yay_dependencies[@]}"; do
         if ! command_exists "$dependency"; then
@@ -56,17 +57,22 @@ update_configs() {
     :
 }
 
+link_dotfile(){
+    if ! ln -s "${HOME}/dotfiles/${1}" "${HOME}/${1}"; then
+        read -p "Remove file and link? (y/n) " choice
+        if [ "$choice" = "y" ]; then
+            rm "${HOME}/${1}"
+            ln -s "${HOME}/dotfiles/${1}" "${HOME}/${1}"
+        fi
+    fi
+}
+
 link_dotfiles(){
-    ln -s ~/dotfiles/.bashrc ~/.bashrc
-    ln -s ~/dotfiles/.bash_profile  ~/.bash_profile
-    ln -s ~/dotfiles/.zcompdump ~/.zcompdump
-    ln -s ~/dotfiles/.zprofile ~/.zprofile
-    ln -s ~/dotfiles/.zshrc ~/.zshrc
-    ln -s ~/dotfiles/.p10k.zsh ~/.p10k.zsh
-    ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-    ln -s ~/dotfiles/.git-credentials ~/.git-credentials
-    ln -s ~/dotfiles/.vim ~/.vim
-    ln -s ~/dotfiles/.vimrc ~/.vimrc
+    dotfiles=(".zprofile" ".zshrc" ".p10k.zsh" ".gitconfig" ".git-credentials" ".vimrc")
+
+    for dotfile  in "${dotfiles[@]}"; do
+        link_dotfile "$dotfile"
+    done
 }
 
 add_user_to_groups(){
@@ -74,14 +80,14 @@ add_user_to_groups(){
 }
 
 set_shell(){
-    chsh -s /usr/bin/zsh
-    sudo chsh -s /usr/bin/zsh
+    chsh -s "/usr/bin/zsh"
+    sudo chsh -s "/usr/bin/zsh"
 }
 
 install_vimrc_config(){
-    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-    sh ~/.vim_runtime/install_awesome_vimrc.sh
-    mkdir -p ~/.vim_runtime/pack/plugins/start
+    git clone --depth=1 "https://github.com/amix/vimrc.git" "${HOME}/.vim_runtime"
+    sh "${HOME}/.vim_runtime/install_awesome_vimrc.sh"
+    mkdir -p "${HOME}/.vim_runtime/pack/plugins/start"
 }
 
 yay -Syyu --noconfirm --disable-download-timeout
@@ -90,10 +96,10 @@ install_basic_packages
 install_from_aur
 install_yay_packages
 update_configs
-link_dotfiles
 add_user_to_groups
 set_shell
 install_vimrc_config
 start_daemons
+link_dotfiles
 
 echo "your done! reboot your system"

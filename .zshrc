@@ -22,7 +22,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # End of lines added by compinstall
 
 
-# own modifications
+#============ own modifications =====================
 alias list_orphans='echo $(pacman -Qdtq)'
 # assumes styler is installed: install.package("styler")
 alias rformat='Rscript -e "styler::style_dir()"'
@@ -31,7 +31,7 @@ pyclean () {
     find . -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
 }
 
-# end of own modificaions
+#==========  ========================================
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
