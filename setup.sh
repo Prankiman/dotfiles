@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# comment to allow partial steps to fail
+# uncommennt for debugging
+# set -x
 set -e
 
 command_exists() {
@@ -61,26 +62,11 @@ link_dotfile(){
         read -p "Remove file and link? (y/n) " choice
         if [ "$choice" = "y" ]; then
             rm "${HOME}/${1}"
-            ln -s "${HOME}/dotfiles/${1}" "${HOME}/${1}"
+            if ! ln -s "${HOME}/dotfiles/${1}" "${HOME}/${1}"; then
+                echo "failed, continuing"
+            fi
         fi
     fi
-}
-
-link_dotfiles(){
-    dotfiles=(".zprofile" ".zshrc" ".p10k.zsh" ".gitconfig" ".git-credentials" ".vimrc")
-
-    for dotfile  in "${dotfiles[@]}"; do
-        link_dotfile "$dotfile"
-    done
-}
-
-add_user_to_groups(){
-    sudo usermod -aG audio video wheel ${USER}
-}
-
-set_shell(){
-    chsh -s "/usr/bin/zsh"
-    sudo chsh -s "/usr/bin/zsh"
 }
 
 install_vimrc_config(){
@@ -89,16 +75,39 @@ install_vimrc_config(){
     mkdir -p "${HOME}/.vim_runtime/pack/plugins/start"
 }
 
+link_dotfiles(){
+    dotfiles=(".zprofile" ".zshrc" ".p10k.zsh" ".gitconfig" ".git-credentials" ".vimrc")
+
+    set +e
+    for dotfile  in "${dotfiles[@]}"; do
+        link_dotfile "$dotfile"
+    done
+    set -e
+}
+
+add_user_to_groups(){
+    set +e
+    sudo usermod -aG audio video wheel ${USER}
+    set -e
+}
+
+set_shell(){
+    set +e
+    chsh -s "/usr/bin/zsh"
+    sudo chsh -s "/usr/bin/zsh"
+    set -e
+}
+
 yay -Syyu --noconfirm --disable-download-timeout
 
 install_basic_packages
 install_from_aur
 install_yay_packages
 update_configs
-add_user_to_groups
-set_shell
 install_vimrc_config
-start_daemons
 link_dotfiles
+add_user_to_groups
+start_daemons
+set_shell
 
 echo "your done! reboot your system"
