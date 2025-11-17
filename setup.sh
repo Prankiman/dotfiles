@@ -17,6 +17,7 @@ install_from_aur() {
         git clone "https://aur.archlinux.org/yay.git" "/tmp/yay"
         cd "/tmp/yay" && makepkg -sirc --noconfirm
     fi
+    cd -
 }
 
 # Assumes 'sudo' command exists
