@@ -98,10 +98,11 @@ set_shell(){
     set -e
 }
 
+install_from_aur
+
 yay -Syyu --noconfirm --disable-download-timeout
 
 install_basic_packages
-install_from_aur
 install_yay_packages
 update_configs
 install_vimrc_config
