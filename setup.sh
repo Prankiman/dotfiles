@@ -16,8 +16,8 @@ install_from_aur() {
     if ! command_exists "yay"; then
         git clone "https://aur.archlinux.org/yay.git" "/tmp/yay"
         cd "/tmp/yay" && makepkg -sirc --noconfirm
+        cd -
     fi
-    cd -
 }
 
 # Assumes 'sudo' command exists
@@ -36,7 +36,7 @@ install_basic_packages() {
 
 
 install_yay_packages() {
-    yay_dependencies=($(< "./yay_dependencies"))
+    yay_dependencies=($(< "yay_dependencies"))
 
     for dependency in "${yay_dependencies[@]}"; do
         if ! command_exists "$dependency"; then
