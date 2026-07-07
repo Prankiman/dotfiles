@@ -29,8 +29,6 @@ pipewire-pulse
 bluez
 networkmanager
 wireshark-qt
-python-pip
-python-pipx
 wl-clipboard
 fastfetch
 reflector
